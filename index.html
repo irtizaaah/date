@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centered Image with Vertical Link</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Set the font to Arial and fallback to sans-serif if Arial is not available */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .center-image {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .link-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .link-container a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <img class="center-image" src="your-image.jpg" alt="Centered Image">
+    <div class="link-container">
+        <a href="https://www.example.com">Click here for more information</a>
+    </div>
+</body>
+</html>
