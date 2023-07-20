@@ -149,7 +149,7 @@ END:VCALENDAR`;
       // Create a download link for the ICS file and trigger the download
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'Date.ics';
+      a.download = './Date.ics';
       a.click();
 
       // Clean up by revoking the URL object
