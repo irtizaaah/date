@@ -1,41 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centered Image with Vertical Link</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif; /* Set the font to Arial and fallback to sans-serif if Arial is not available */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Quiz Website</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
 
-        .center-image {
-            max-width: 100%;
-            max-height: 100%;
-        }
+    header {
+      background-color: #000;
+      text-align: center;
+      padding: 1rem;
+      color: #fff;
+    }
 
-        .link-container {
-            text-align: center;
-            margin-top: 20px;
-        }
+    main {
+      padding: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
 
-        .link-container a {
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-    </style>
+    h1 {
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin: 0;
+      margin-bottom: 1rem;
+    }
+
+    form {
+      margin-top: 1rem;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    label {
+      display: block;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      background-color: #fff;
+      border: 2px solid #ccc;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    label:hover {
+      background-color: #000;
+      color: #fff;
+      border-color: #000;
+    }
+
+    input[type="radio"]:checked + label {
+      background-color: #000;
+      color: #fff;
+      border-color: #000;
+    }
+
+    #done-button {
+      background-color: #000;
+      color: #fff;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    #done-button:hover {
+      background-color: #cc5500;
+    }
+  </style>
 </head>
 <body>
-    <img class="center-image" src="your-image.jpg" alt="Centered Image">
-    <div class="link-container">
-        <a href="https://www.example.com">Click here for more information</a>
-    </div>
+  <header>
+    <h1>Date</h1>
+  </header>
+  <main>
+    <section>
+      <p>We're going on a picnic at a garden to sit and color by numbers.</p>
+    </section>
+    <section>
+      <h2>Menu</h2>
+      <p>What do you want to do about food?</p>
+      <form>
+        <input type="radio" name="answer" id="answer1" value="option1">
+        <label for="answer1">Let's get some fancy bread, tomatoes, cream cheese, and assemble a sandwhich there.</label><br>
+        <input type="radio" name="answer" id="answer2" value="option2">
+        <label for="answer2">Let's get more hands on and cook something together the day before.</label><br>
+        <input type="radio" name="answer" id="answer3" value="option3">
+        <label for="answer3">Let's keep it simple and get something from a store.</label><br>
+        <input type="radio" name="answer" id="answer4" value="option4">
+        <label for="answer4">Let's starve.</label><br>
+      </form>
+    </section>
+    <button id="done-button">Done</button>
+  </main>
+
+  <script>
+    // JavaScript to handle the "Done" button click and generate the ICS attachment
+
+    document.getElementById('done-button').addEventListener('click', function() {
+      // Event details
+      const eventSummary = 'Quiz Reminder';
+      const eventDescription = 'Don\'t forget to take the quiz!';
+      const eventLocation = 'Online';
+      const eventStartDate = '2023-07-20T09:00:00'; // Replace this with the desired start date and time in UTC format (YYYY-MM-DDTHH:mm:ss)
+      const eventEndDate = '2023-07-20T10:00:00'; // Replace this with the desired end date and time in UTC format (YYYY-MM-DDTHH:mm:ss)
+
+      // Generate the ICS attachment content
+      const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:${eventSummary}
+DESCRIPTION:${eventDescription}
+LOCATION:${eventLocation}
+DTSTART:${eventStartDate}
+DTEND:${eventEndDate}
+END:VEVENT
+END:VCALENDAR`;
+
+      // Create a Blob with the ICS content
+      const blob = new Blob([icsContent], { type: 'text/calendar' });
+
+      // Create a URL for the Blob
+      const url = window.URL.createObjectURL(blob);
+
+      // Create a download link for the ICS file and trigger the download
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'quiz_event.ics';
+      a.click();
+
+      // Clean up by revoking the URL object
+      window.URL.revokeObjectURL(url);
+    });
+  </script>
 </body>
 </html>
