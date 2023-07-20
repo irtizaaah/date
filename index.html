@@ -120,11 +120,12 @@
 
     document.getElementById('done-button').addEventListener('click', function() {
       // Event details
-      const eventSummary = 'Quiz Reminder';
-      const eventDescription = 'Don\'t forget to take the quiz!';
-      const eventLocation = 'Online';
-      const eventStartDate = '2023-07-20T09:00:00'; // Replace this with the desired start date and time in UTC format (YYYY-MM-DDTHH:mm:ss)
-      const eventEndDate = '2023-07-20T10:00:00'; // Replace this with the desired end date and time in UTC format (YYYY-MM-DDTHH:mm:ss)
+      const eventSummary = 'Date';
+      const eventDescription = 'We're going on a picnic at a garden to sit and color by numbers.';
+      const eventLocation = 'Elizabeth F. Gamble Garden';
+      const eventStartDate = '2023-07-23T15:00:00'; // 3 PM PST on July 23rd, 2023
+      const eventEndDate = '2023-07-23T18:00:00';   // 6 PM PST on July 23rd, 2023
+
 
       // Generate the ICS attachment content
       const icsContent = `BEGIN:VCALENDAR
@@ -147,7 +148,7 @@ END:VCALENDAR`;
       // Create a download link for the ICS file and trigger the download
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'quiz_event.ics';
+      a.download = 'Date.ics';
       a.click();
 
       // Clean up by revoking the URL object
